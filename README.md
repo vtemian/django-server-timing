@@ -25,3 +25,5 @@ def index(request):
                                                                                      
     return HttpResponse('This page shows a list of most recent posts.')
 ```
+
+![Server Timing Example](https://raw.githubusercontent.com/vtemian/django-server-timing/master/example/server-timing-example.png)

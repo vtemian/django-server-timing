@@ -1,6 +1,12 @@
 # django-server-timing
-Django middleware and utils that add `Server-Timing` header
+Django middleware that exposed collected metrics into [HTTP Server Timing](https://www.w3.org/TR/server-timing/) header.
 
+This headers is used by browser to display several metrics into the `Timing` tab of the `Network` interface.
+Right now, this header is not supported properlly by all browser. It works pretty good on *Chrome 65+* and on *Firefox* there is a bug [report](https://bugzilla.mozilla.org/show_bug.cgi?id=1403051).
+
+It doesn't effect unsupported browser.
+
+This middleware will send the entire header value since not all browsers supports sending it via [HTTP Trailer](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Trailer).
 
 ## Example
 ```python

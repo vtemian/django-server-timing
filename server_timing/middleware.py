@@ -42,7 +42,7 @@ class TimedService(object):
 def timed(name, description=""):
     service = TimedService(name, description)
     service.start()
-    yield
+    yield service
     service.end()
 
 

@@ -1,7 +1,11 @@
 import sys
 
+import pytest
+
 import django
 from django.conf import settings
+
+from server_timing.middleware import discard_all_services
 
 
 settings.configure(
@@ -31,3 +35,8 @@ settings.configure(
 
 
 django.setup()
+
+
+@pytest.fixture
+def discard():
+    discard_all_services()

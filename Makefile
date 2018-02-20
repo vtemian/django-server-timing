@@ -1,7 +1,7 @@
 full-test: test
 
 test:
-	pytest tests/
+	pytest --cov=server_timing tests/
 
 run:
 	cd example && \

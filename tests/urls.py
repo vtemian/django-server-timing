@@ -7,7 +7,7 @@ from server_timing.middleware import TimedService, timed, timed_wrapper
 
 
 @timed_wrapper('index', 'Index View')
-def index(request):
+def complex_view(request):
     home_service = TimedService('first', 'First service')
     home_service.start()
 
@@ -18,9 +18,14 @@ def index(request):
     with timed('second', 'Second service'):
         time.sleep(0.005)
 
-    return HttpResponse('This page shows a list of most recent posts.')
+    return HttpResponse('This page is empty')
+
+
+def no_header_view(request):
+    return HttpResponse('This page is empty')
 
 
 urlpatterns = [
-    url('', index)
+    url('complex', complex_view),
+    url('no-header', no_header_view),
 ]

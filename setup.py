@@ -8,7 +8,7 @@ setup(
     version=server_timing.__version__,
     author='Vlad Temian',
     author_email='vladtemian@gmail.com',
-    url='http://github.com/vtemian/django-silver-timing',
+    url='http://github.com/vtemian/django-server-timing',
     description='Django middleware that integrates Server-Timing header',
     packages=find_packages(),
     include_package_data=True,

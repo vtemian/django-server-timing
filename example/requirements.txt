@@ -1,5 +1,5 @@
 attrs==17.4.0
-Django==2.2.13
+Django==2.2.22
 pluggy==0.6.0
 py==1.5.2
 pytest==3.4.0

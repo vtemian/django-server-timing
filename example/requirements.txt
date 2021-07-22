@@ -1,7 +1,7 @@
-attrs==17.4.0
-Django==2.2.13
-pluggy==0.6.0
-py==1.5.2
-pytest==3.4.0
-pytz==2018.3
-six==1.11.0
+attrs==21.2.0
+Django==3.2.5
+pluggy==0.13.1
+py==1.10.0
+pytest==6.2.4
+pytz==2021.1
+six==1.16.0

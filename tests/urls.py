@@ -1,7 +1,7 @@
 import time
 
-from django.conf.urls import url
 from django.http import HttpResponse
+from django.urls import path
 
 from server_timing.middleware import TimedService, timed, timed_wrapper
 
@@ -26,6 +26,6 @@ def no_header_view(request):
 
 
 urlpatterns = [
-    url('complex', complex_view),
-    url('no-header', no_header_view),
+    path('complex', complex_view),
+    path('no-header', no_header_view),
 ]

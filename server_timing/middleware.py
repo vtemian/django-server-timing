@@ -2,6 +2,7 @@ import time
 import threading
 from contextlib import contextmanager
 
+import django
 from django.utils.deprecation import MiddlewareMixin
 
 
@@ -68,6 +69,9 @@ class ServerTiming(MiddlewareMixin):
             for service in get_services()
         ]
         if services:
-            response._headers['server-timing'] = ('Server-Timing', ','.join(services))
+            if django.VERSION >= (3, 2):
+                response.headers['Server-Timing'] = ','.join(services)
+            else:
+                response._headers['Server-Timing'] = ','.join(services)
             discard_all_services()
         return response

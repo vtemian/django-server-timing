@@ -9,6 +9,7 @@ from server_timing.middleware import discard_all_services
 
 
 settings.configure(
+    SECRET_KEY = "local_key",
     DEBUG=True,
     ROOT_URLCONF='tests.urls',
     DATABASES={

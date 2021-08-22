@@ -33,13 +33,15 @@ class ServerTimingSilkMiddleware:
         return response
 
 
-class ServerTimingSilkViewOnlyMiddleware(ServerTimingSilkMiddleware):
+class ServerTimingSilkViewOnlyMiddleware:
     """
     This middleware would be put as the last middleware, to measure the
     response time of only the underlying view.
     """
+    def __init__(self, get_response):
+        self.get_response = get_response
+
     def __call__(self, request):
         with timed("request-view", "Request View"):
             response = self.get_response(request)
-        self._get_query_timing(request)
         return response

@@ -22,10 +22,14 @@ def add_service(service):
 
 
 class TimedService(object):
-    def __init__(self, name, description=''):
+    def __init__(self, name, description="", duration=None):
         self.name = name
         self.description = description
+        self._duration = duration
         self._start = self._end = None
+
+        if self._duration:
+            add_service(self)
 
     def start(self):
         self._start = time.time()
@@ -36,6 +40,8 @@ class TimedService(object):
 
     @property
     def duration(self):
+        if not self._start and self._duration:
+            return self._duration
         return int(((self._end or time.time()) - self._start) * 1000)
 
 

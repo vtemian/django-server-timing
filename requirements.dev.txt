@@ -1,4 +1,4 @@
-Django==3.2.6
+Django==3.2.18
 attrs==21.2.0
 pluggy==0.13.1
 py==1.10.0

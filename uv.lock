@@ -247,7 +247,7 @@ silk = [
 [package.metadata]
 requires-dist = [
     { name = "django", marker = "extra == 'dev'", specifier = ">=4.2" },
-    { name = "django-silk", marker = "extra == 'silk'", git = "https://github.com/jazzband/django-silk.git" },
+    { name = "django-silk", marker = "extra == 'silk'", specifier = ">=5.4.0" },
     { name = "pip-audit", marker = "extra == 'dev'", specifier = ">=2.6.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.2.2" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0.0" },
@@ -258,12 +258,16 @@ provides-extras = ["dev", "silk"]
 
 [[package]]
 name = "django-silk"
-version = "5.4.1.dev5+gfc896a0"
-source = { git = "https://github.com/jazzband/django-silk.git#fc896a01067851675967a900d0c23f446fc31864" }
+version = "5.4.0"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
     { name = "gprof2dot" },
     { name = "sqlparse" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/70/9d/b638031cc89ce79cc1d46f27c3a5cc6c2e6aaedab4be6f8238d51c08c58f/django_silk-5.4.0.tar.gz", hash = "sha256:2247870ac8080b6c6c5db17f2f1042d39d95e4a5fa061d661882777ec9adb672", size = 4494394, upload-time = "2025-06-01T23:22:23.915Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3e/fc/ad0f20a97d56e36c6bd7c785b7e158be5b78597665a9312d3de7c7d672e2/django_silk-5.4.0-py3-none-any.whl", hash = "sha256:caf720a06e24a6cf1acf825c1868b2a6ece8158b13725363f6d3a1a9994d0fa6", size = 1944115, upload-time = "2025-06-01T23:22:38.845Z" },
 ]
 
 [[package]]

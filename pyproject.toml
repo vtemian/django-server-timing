@@ -46,7 +46,7 @@ silk = [
 
 [tool.hatch.version]
 source = "vcs"
-fallback-version = "0.0.3"
+fallback-version = "0.2.0"
 
 
 [tool.hatch.build.targets.wheel]

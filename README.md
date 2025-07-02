@@ -1,7 +1,6 @@
 # django-server-timing
 
 [![CI](https://github.com/vtemian/django-server-timing/actions/workflows/ci.yml/badge.svg)](https://github.com/vtemian/django-server-timing/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/vtemian/django-server-timing/branch/master/graph/badge.svg)](https://codecov.io/gh/vtemian/django-server-timing)
 
 Django middleware that exposed collected metrics into [HTTP Server Timing](https://www.w3.org/TR/server-timing/) header.
 

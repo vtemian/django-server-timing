@@ -1,0 +1,148 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Test with Python 3.10
+          - python-version: "3.10"
+            django-version: "3.2"
+          - python-version: "3.10"
+            django-version: "4.2"
+          - python-version: "3.10"
+            django-version: "5.0"
+          
+          # Test with Python 3.11
+          - python-version: "3.11"
+            django-version: "4.2"
+          - python-version: "3.11"
+            django-version: "5.0"
+          - python-version: "3.11"
+            django-version: "5.1"
+          
+          # Test with Python 3.12
+          - python-version: "3.12"
+            django-version: "5.0"
+          - python-version: "3.12"
+            django-version: "5.1"
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+
+    - name: Set up project
+      run: uv sync --dev
+
+    - name: Install specific Django version
+      run: uv add "django~=${{ matrix.django-version }}.0" --dev
+
+    - name: Run tests
+      run: uv run pytest --cov=server_timing --cov-report=xml
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+
+    - name: Set up project
+      run: uv sync --dev
+
+    - name: Run Ruff linting
+      run: uv run ruff check .
+
+    - name: Run Ruff format check
+      run: uv run ruff format --check .
+
+    - name: Check Django configuration
+      run: |
+        cd example
+        uv run python manage.py check
+
+    - name: Validate package build
+      run: uv build
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: dist/
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+
+    - name: Set up project
+      run: uv sync --dev
+
+    - name: Install pip-audit
+      run: uv pip install pip-audit
+
+    - name: Run safety check
+      run: uv run pip-audit || true  # Don't fail CI on security issues, just report
+
+  publish:
+    needs: [test, lint]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    environment:
+      name: pypi
+      url: https://pypi.org/p/django-server-timing
+    permissions:
+      id-token: write
+
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: dist
+        path: dist/
+
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1

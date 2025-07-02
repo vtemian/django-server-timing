@@ -1,29 +1,29 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 import server_timing
 
-
 setup(
-    name='django-server-timing',
+    name="django-server-timing",
     version=server_timing.__version__,
-    author='Vlad Temian',
-    author_email='vladtemian@gmail.com',
-    url='http://github.com/vtemian/django-server-timing',
-    description='Django middleware that integrates Server-Timing header',
+    author="Vlad Temian",
+    author_email="vladtemian@gmail.com",
+    url="http://github.com/vtemian/django-server-timing",
+    description="Django middleware that integrates Server-Timing header",
     packages=find_packages(),
     include_package_data=True,
+    python_requires=">=3.10",
     install_requires=[],
     classifiers=[
-        'Environment :: Web Environment',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
-        'Framework :: Django :: 1.10',
-        'Framework :: Django :: 1.11',
-        'Framework :: Django :: 2.0',
-        'Development Status :: 5 - Production/Stable',
-        'License :: OSI Approved :: Apache Software License',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
+        "Environment :: Web Environment",
+        "Framework :: Django :: 3.2",
+        "Framework :: Django :: 4.0",
+        "Framework :: Django :: 4.1",
+        "Framework :: Django :: 4.2",
+        "Framework :: Django :: 5.0",
+        "Development Status :: 5 - Production/Stable",
+        "License :: OSI Approved :: Apache Software License",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
     ],
 )

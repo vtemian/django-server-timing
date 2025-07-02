@@ -1,10 +1,9 @@
-import time
 import threading
+import time
 from contextlib import contextmanager
 
 import django
 from django.utils.deprecation import MiddlewareMixin
-
 
 _thread_local = threading.local()
 
@@ -21,7 +20,7 @@ def add_service(service):
     get_services().append(service)
 
 
-class TimedService(object):
+class TimedService:
     def __init__(self, name, description="", duration=None):
         self.name = name
         self.description = description
@@ -64,20 +63,26 @@ def timed_wrapper(name, description=""):
             service.end()
 
             return result
+
         return func
+
     return wrapper
 
 
 class ServerTiming(MiddlewareMixin):
     def process_response(self, request, response):
         services = [
-            service.name + ';desc="' + service.description + '";dur=' + str(service.duration)
+            service.name
+            + ';desc="'
+            + service.description
+            + '";dur='
+            + str(service.duration)
             for service in get_services()
         ]
         if services:
             if django.VERSION >= (3, 2):
-                response.headers['Server-Timing'] = ','.join(services)
+                response.headers["Server-Timing"] = ",".join(services)
             else:
-                response._headers['Server-Timing'] = ','.join(services)
+                response._headers["Server-Timing"] = ",".join(services)
             discard_all_services()
         return response

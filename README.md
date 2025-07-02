@@ -1,8 +1,12 @@
 # django-server-timing
+
+[![CI](https://github.com/vtemian/django-server-timing/actions/workflows/ci.yml/badge.svg)](https://github.com/vtemian/django-server-timing/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/vtemian/django-server-timing/branch/master/graph/badge.svg)](https://codecov.io/gh/vtemian/django-server-timing)
+
 Django middleware that exposed collected metrics into [HTTP Server Timing](https://www.w3.org/TR/server-timing/) header.
 
 This headers is used by browser to display several metrics into the `Timing` tab of the `Network` interface.
-Right now, this header is not supported properlly by all browser. It works pretty good on **Chrome 65+** and on **Firefox there is a bug** [report](https://bugzilla.mozilla.org/show_bug.cgi?id=1403051).
+Right now, this header is not supported properlly by all browser
 
 It doesn't effect unsupported browser.
 
@@ -10,11 +14,13 @@ This middleware will send the entire header value since not all browsers support
 
 ## Install
 
-It works on **Python >= 2.7** and **Django >= 1.8**
+It works on **Python >= 3.10** and **Django >= 3.2**
 
-Install easly via `pip`
+Install easily via `pip` or `uv`
 ```bash
 pip install django-server-timing
+# or with uv
+uv add django-server-timing
 ```
 And configure `MIDDLEWARES`
 

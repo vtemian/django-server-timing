@@ -14,13 +14,18 @@ This middleware will send the entire header value since not all browsers support
 
 ## Install
 
-It works on **Python >= 3.10** and **Django >= 3.2**
+It works on **Python >= 3.10** and **Django >= 4.2**
 
 Install easily via `pip` or `uv`
 ```bash
 pip install django-server-timing
 # or with uv
 uv add django-server-timing
+
+# For SQL timing with django-silk integration
+pip install django-server-timing[silk]
+# or with uv
+uv add django-server-timing[silk]
 ```
 And configure `MIDDLEWARES`
 

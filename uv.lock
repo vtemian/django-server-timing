@@ -234,12 +234,14 @@ source = { editable = "." }
 [package.optional-dependencies]
 dev = [
     { name = "django" },
-    { name = "django-silk" },
     { name = "pip-audit" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "pytest-django" },
     { name = "ruff" },
+]
+silk = [
+    { name = "django-silk" },
 ]
 
 [package.dev-dependencies]
@@ -249,15 +251,15 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", marker = "extra == 'dev'", specifier = ">=3.2" },
-    { name = "django-silk", marker = "extra == 'dev'", git = "https://github.com/jazzband/django-silk.git" },
+    { name = "django", marker = "extra == 'dev'", specifier = ">=4.2" },
+    { name = "django-silk", marker = "extra == 'silk'", git = "https://github.com/jazzband/django-silk.git" },
     { name = "pip-audit", marker = "extra == 'dev'", specifier = ">=2.6.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.2.2" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0.0" },
     { name = "pytest-django", marker = "extra == 'dev'", specifier = ">=4.8.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.8.0" },
 ]
-provides-extras = ["dev"]
+provides-extras = ["dev", "silk"]
 
 [package.metadata.requires-dev]
 dev = [{ name = "django", specifier = "~=4.2.0" }]

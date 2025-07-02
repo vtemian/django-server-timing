@@ -22,6 +22,9 @@ make test
 # Install development dependencies with uv
 uv sync --dev
 
+# Install with silk integration for SQL timing
+uv sync --dev --extra silk
+
 # Install production dependencies only
 uv sync
 
@@ -93,8 +96,8 @@ Server-Timing: index;desc="Index View";dur=800,first;desc="First service";dur=30
 
 ### Django Compatibility
 
-- Supports Django 3.2+ through 5.0+
-- Handles Django 3.2+ header API changes in `server_timing/middleware.py:62-65`
+- Supports Django 4.2+ through 5.1+
+- Uses Django's modern header API (`response.headers`)
 - Python 3.10+ required
 
 ### Package Management
@@ -102,7 +105,8 @@ Server-Timing: index;desc="Index View";dur=800,first;desc="First service";dur=30
 - Uses `uv` for fast dependency management and virtual environments
 - `pyproject.toml` defines project configuration and dependencies
 - `uv.lock` provides reproducible dependency resolution
-- Development dependencies include Django 5.0+, pytest 8.2+, django-silk, and Ruff
+- Development dependencies include Django 4.2+, pytest 8.2+, and Ruff
+- django-silk is available as optional dependency for SQL timing features
 - Ruff configuration in `pyproject.toml` enforces code style and quality
 
 ## Testing Guidelines
@@ -115,7 +119,7 @@ Server-Timing: index;desc="Index View";dur=800,first;desc="First service";dur=30
 ## CI/CD
 
 - Uses GitHub Actions for continuous integration (`.github/workflows/ci.yml`)
-- Matrix testing across Python 3.10-3.12 and Django 3.2-5.1 
+- Matrix testing across Python 3.10-3.12 and Django 4.2-5.1 
 - Automated security scanning with pip-audit
 - Code coverage reporting to Codecov
 - Package build validation on every commit
@@ -137,7 +141,7 @@ See `RELEASING.md` for detailed release instructions.
 - Uses modern Python packaging with `pyproject.toml` and `uv`
 - Build process uses `uv build` to create wheel distributions
 - Code formatting and linting enforced with Ruff
-- Minimum Python version increased to 3.10 due to Django 5.0+ and django-silk requirements
+- Minimum Python version increased to 3.10 due to Django 4.2+ requirements
 - Migrated from Travis CI to GitHub Actions for modern CI/CD
 - Automated release management with version bumping scripts and PyPI publishing
 - Release documentation in `RELEASING.md` with detailed instructions

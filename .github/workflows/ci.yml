@@ -48,7 +48,7 @@ jobs:
         version: "latest"
 
     - name: Set up project
-      run: uv sync --dev
+      run: uv sync --extra dev
 
     - name: Install specific Django version
       run: uv add "django~=${{ matrix.django-version }}.0" --dev
@@ -80,7 +80,7 @@ jobs:
         version: "latest"
 
     - name: Set up project
-      run: uv sync --dev
+      run: uv sync --extra dev
 
     - name: Run Ruff linting
       run: uv run ruff check .
@@ -118,7 +118,7 @@ jobs:
         version: "latest"
 
     - name: Set up project
-      run: uv sync --dev
+      run: uv sync --extra dev
 
     - name: Install pip-audit
       run: uv pip install pip-audit
